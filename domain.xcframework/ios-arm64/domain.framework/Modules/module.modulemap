@@ -1,0 +1,8 @@
+framework module domain {
+    umbrella header "domain.h"
+
+    export *
+    module * { export * }
+
+    use Foundation
+}
