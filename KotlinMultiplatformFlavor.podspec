@@ -23,8 +23,5 @@ Pod::Spec.new do |s|
                  :tag => "#{s.version}" }
 
     # 8
-    s.source_files = "KotlinMultiplataformLibrary/**/*.{swift}"
-
-    # 9
-    s.resources = "KotlinMultiplataformLibrary/**/*.{png,jpeg,jpg,storyboard,xib,xcassets}"
+    s.source_files = "KotlinMultiplataformLibrary/**/*.{xcframework}"
 end
