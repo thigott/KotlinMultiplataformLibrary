@@ -70,6 +70,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.source_files  = "KotlinMultiplataformLibrary/**/*.{swift}"
+  spec.resources = "KotlinMultiplataformLibrary/**/*.{png,jpeg,jpg,storyboard,xib,xcassets}"
   # spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"
