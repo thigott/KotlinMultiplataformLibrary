@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "KotlinMultiplatformFlavor"
-  spec.version      = "0.0.1"
+  spec.version      = "1.0.3"
   spec.summary      = "First KotlinMultiplatform published for learning purpose"
 
   spec.description  = <<-DESC "Publishing KotlinMultiplatformLibrary to Cocoapods"
