@@ -1,14 +1,30 @@
 Pod::Spec.new do |spec|
-  spec.name = 'KotlinMultiplatformFlavor'
-  spec.version = '2.0.0'
-  spec.homepage = 'https://github.com/thigott/KotlinMultiplataformLibrary'
-  spec.source = { :git => "https://github.com/thigott/KotlinMultiplataformLibrary", :tag => "2.0.0" }
-  spec.authors = 'Thiago Gottardo Alves'
-  spec.license = { :type => "MIT", :file => "LICENSE" }
-  spec.summary = 'An KMM Libray Example'
-  spec.static_framework = true
-  spec.vendored_frameworks = "shared.xcframework"
-  spec.libraries = "c++"
-  spec.module_name = "#{spec.name}_umbrella"
-  spec.ios.deployment_target = '14.1'
+    # 1
+    s.platform = :ios
+    s.ios.deployment_target = '14.1'
+    s.name = "KotlinMultiplatformFlavor"
+    s.summary = "KMM Library"
+    s.requires_arc = true
+
+    # 2
+    s.version = "2.0.0"
+
+    # 3
+    s.license = { :type => "MIT", :file => "LICENSE" }
+
+    # 4 - Replace with your name and e-mail address
+    s.author = { "Thiago Alves" => "thiagoalves@ioasys.com.br" }
+
+    # 5 - Replace this URL with your own GitHub page's URL (from the address bar)
+    s.homepage = "https://github.com/thigott/KotlinMultiplataformLibrary"
+
+    # 6 - Replace this URL with your own Git URL from "Quick Setup"
+    s.source = { :git => "https://github.com/thigott/KotlinMultiplataformLibrary.git",
+                 :tag => "#{s.version}" }
+
+    # 8
+    s.source_files = "KotlinMultiplataformLibrary/**/*.{swift}"
+
+    # 9
+    s.resources = "KotlinMultiplataformLibrary/**/*.{png,jpeg,jpg,storyboard,xib,xcassets}"
 end
