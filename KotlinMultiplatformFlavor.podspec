@@ -1,4 +1,4 @@
-Pod::Spec.new do |spec|
+Pod::Spec.new do |s|
     # 1
     s.platform = :ios
     s.ios.deployment_target = '14.1'
