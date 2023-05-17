@@ -23,5 +23,5 @@ Pod::Spec.new do |s|
                  :tag => "#{s.version}" }
 
     # 8
-    s.source_files = "KotlinMultiplataformLibrary-2.0.0/**/*"
+    s.source_files = "/**/*"
 end
