@@ -8,10 +8,10 @@ class GetKtorTestUseCaseHelper : KoinComponent {
 
     private val getKtorTestUseCase by inject<GetKtorTestUseCase>()
     fun getKtorTestUseCase(
-        success: () -> Unit,
-        error: () -> Unit
+        success: (String) -> Unit,
+        error: (Throwable) -> Unit
     ) = getKtorTestUseCase(
-        onSuccess = { success.invoke() },
-        onError = { error.invoke() }
+        onSuccess = { success.invoke(it) },
+        onError = { error.invoke(it) }
     )
 }
