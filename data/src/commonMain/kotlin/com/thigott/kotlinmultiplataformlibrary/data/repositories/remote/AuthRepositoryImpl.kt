@@ -33,7 +33,6 @@ class AuthRepositoryImpl(
                             deviceId = ""
                         )
                     )
-                    contentType(ContentType.Application.Json)
                 }.body<GenericResponse<LoginResponse>>()
             }.toDomain()
         )
