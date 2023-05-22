@@ -27,6 +27,8 @@ ktorSerialization = { group = "io.ktor", name = "ktor-client-serialization", ver
 ktorAndroidClient = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktorVersion" }
 ktorHttpClient = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktorVersion" }
 ktorIOSClient = { group = "io.ktor", name = "ktor-client-ios", version.ref = "ktorVersion" }
+ktorContentNegotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktorVersion" }
+ktorJsonSerialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktorVersion" }
 koinCore = { group = "io.insert-koin", name = "koin-core", version.ref = "koinVersion" }
 coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutineVersion" }
 
@@ -37,6 +39,6 @@ com-android-library = { id = "com.android.library", version.ref = "com-android-l
 org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
 
 [bundles]
-ktor = [ "ktorCore", "ktorLogging", "ktorSerialization" ]
+ktor = [ "ktorCore", "ktorLogging", "ktorSerialization", "ktorJsonSerialization", "ktorContentNegotiation" ]
 ktorAndroid = [ "ktorHttpClient", "ktorAndroidClient" ]
 koin = [ "koinCore", "coroutines" ]

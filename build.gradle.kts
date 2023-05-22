@@ -3,6 +3,7 @@ plugins {
     id("com.android.library").version("8.1.0-beta02").apply(false)
     kotlin("multiplatform").version("1.8.10").apply(false)
     id("maven-publish")
+    id("org.jetbrains.kotlin.plugin.serialization").version("1.8.21")
 }
 
 tasks.register("clean", Delete::class) {
