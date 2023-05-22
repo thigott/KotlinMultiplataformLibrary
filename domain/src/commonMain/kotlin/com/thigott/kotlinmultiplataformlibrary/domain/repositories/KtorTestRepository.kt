@@ -4,5 +4,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface KtorTestRepository {
 
-    suspend fun getKtorTest(): Flow<String>
+    fun getKtorTest(): Flow<String>
 }

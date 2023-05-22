@@ -10,7 +10,7 @@ import org.koin.core.component.KoinComponent
 
 abstract class UseCase<T, in Params>(private val scope: CoroutineScope): KoinComponent {
 
-    abstract suspend fun run(params: Params? = null): Flow<T>
+    abstract fun run(params: Params? = null): Flow<T>
 
     operator fun invoke(
         params: Params? = null,

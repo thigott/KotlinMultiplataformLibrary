@@ -10,5 +10,5 @@ class GetKtorTestUseCase(
     private val repository: KtorTestRepository
 ): UseCase<String, Unit>(scope = scope) {
 
-    override suspend fun run(params: Unit?): Flow<String> = repository.getKtorTest()
+    override fun run(params: Unit?): Flow<String> = repository.getKtorTest()
 }

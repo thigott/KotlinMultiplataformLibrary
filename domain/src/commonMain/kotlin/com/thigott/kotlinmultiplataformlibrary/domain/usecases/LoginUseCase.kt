@@ -15,7 +15,7 @@ class LoginUseCase(
         val password: String
     )
 
-    override suspend fun run(params: Params?) = when (params) {
+    override fun run(params: Params?) = when (params) {
         null -> throw NullPointerException()
         else -> repository.login(username = params.username, password = params.password)
     }

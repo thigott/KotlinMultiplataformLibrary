@@ -12,7 +12,7 @@ class KtorTestRepositoryImpl(
     private val httpClient: HttpClient
 ): KtorTestRepository {
 
-    override suspend fun getKtorTest(): Flow<String> = flow {
+    override fun getKtorTest(): Flow<String> = flow {
         emit(
             httpClient.get(GET_KTOR_DOC_URL).bodyAsText()
         )
