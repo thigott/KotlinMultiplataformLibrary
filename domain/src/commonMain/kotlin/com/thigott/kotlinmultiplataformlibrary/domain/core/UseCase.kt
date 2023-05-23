@@ -1,8 +1,8 @@
 package com.thigott.kotlinmultiplataformlibrary.domain.core
 
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -18,7 +18,11 @@ abstract class UseCase<T, in Params>(private val scope: CoroutineScope): KoinCom
         onError: ((Throwable) -> Unit) = {},
         onSuccess: (T) -> Unit = {}
     ) {
-        val deferred = scope.async {
+        val coroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
+            onError.invoke(throwable)
+        }
+
+        scope.launch(Dispatchers.Main + coroutineExceptionHandler) {
             try {
                 run(params).collect {
                     withContext(Dispatchers.Main) {
@@ -31,17 +35,6 @@ abstract class UseCase<T, in Params>(private val scope: CoroutineScope): KoinCom
                 }
             }
         }
-
-        scope.launch(Dispatchers.Default) {
-            try {
-                deferred.await()
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    onError(e)
-                }
-            }
-        }
-
     }
 
     fun cancel() = scope.coroutineContext.cancelChildren()
