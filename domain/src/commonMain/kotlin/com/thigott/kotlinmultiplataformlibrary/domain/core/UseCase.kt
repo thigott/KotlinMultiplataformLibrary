@@ -3,17 +3,14 @@ package com.thigott.kotlinmultiplataformlibrary.domain.core
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.supervisorScope
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 
 abstract class UseCase<T, in Params>(private val scope: CoroutineScope): KoinComponent {
-
-    private var job: Job? = null
 
     abstract fun run(params: Params? = null): Flow<T>
 
@@ -24,19 +21,20 @@ abstract class UseCase<T, in Params>(private val scope: CoroutineScope): KoinCom
     ) {
         val coroutineExceptionHandler = CoroutineExceptionHandler { _, error ->
             onError.invoke(error)
-            job?.cancel()
         }
 
-        job = scope.launch(Dispatchers.Default + coroutineExceptionHandler) {
-            try {
-                run(params).collect {
-                    withContext(Dispatchers.Main) {
-                        onSuccess(it)
+        scope.launch(Dispatchers.Default + coroutineExceptionHandler) {
+            supervisorScope {
+                try {
+                    run(params).collect {
+                        withContext(Dispatchers.Main) {
+                            onSuccess(it)
+                        }
                     }
-                }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    onError(e)
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        onError(e)
+                    }
                 }
             }
         }
@@ -44,6 +42,4 @@ abstract class UseCase<T, in Params>(private val scope: CoroutineScope): KoinCom
     }
 
     fun cancel() = scope.coroutineContext.cancelChildren()
-
-    fun cancelScope() = scope.coroutineContext.cancel()
 }
