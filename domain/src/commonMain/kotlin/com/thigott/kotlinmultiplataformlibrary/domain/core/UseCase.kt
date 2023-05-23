@@ -1,12 +1,11 @@
 package com.thigott.kotlinmultiplataformlibrary.domain.core
 
-import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 
@@ -19,22 +18,20 @@ abstract class UseCase<T, in Params>(private val scope: CoroutineScope): KoinCom
         onError: ((Throwable) -> Unit) = {},
         onSuccess: (T) -> Unit = {}
     ) {
-        val coroutineExceptionHandler = CoroutineExceptionHandler { _, error ->
-            onError.invoke(error)
+        val deferred = scope.async {
+            run(params).collect {
+                withContext(Dispatchers.Main) {
+                    onSuccess(it)
+                }
+            }
         }
 
-        scope.launch(Dispatchers.Default + coroutineExceptionHandler) {
-            supervisorScope {
-                try {
-                    run(params).collect {
-                        withContext(Dispatchers.Main) {
-                            onSuccess(it)
-                        }
-                    }
-                } catch (e: Exception) {
-                    withContext(Dispatchers.Main) {
-                        onError(e)
-                    }
+        scope.launch(Dispatchers.Default) {
+            try {
+                deferred.await()
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    onError(e)
                 }
             }
         }
