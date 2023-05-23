@@ -19,9 +19,15 @@ abstract class UseCase<T, in Params>(private val scope: CoroutineScope): KoinCom
         onSuccess: (T) -> Unit = {}
     ) {
         val deferred = scope.async {
-            run(params).collect {
+            try {
+                run(params).collect {
+                    withContext(Dispatchers.Main) {
+                        onSuccess(it)
+                    }
+                }
+            } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    onSuccess(it)
+                    onError(e)
                 }
             }
         }
