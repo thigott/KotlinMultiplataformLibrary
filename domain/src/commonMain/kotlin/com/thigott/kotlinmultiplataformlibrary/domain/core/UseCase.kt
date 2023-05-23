@@ -24,6 +24,7 @@ abstract class UseCase<T, in Params>(private val scope: CoroutineScope): KoinCom
             context.cancel()
             context.cancelChildren()
             cancel()
+            cancelScope()
         }
 
         scope.launch(Dispatchers.Default + coroutineExceptionHandler) {
@@ -43,4 +44,6 @@ abstract class UseCase<T, in Params>(private val scope: CoroutineScope): KoinCom
     }
 
     fun cancel() = scope.coroutineContext.cancelChildren()
+
+    fun cancelScope() = scope.coroutineContext.cancel()
 }
