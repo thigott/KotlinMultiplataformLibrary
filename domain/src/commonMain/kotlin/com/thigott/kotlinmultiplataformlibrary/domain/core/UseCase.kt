@@ -3,6 +3,7 @@ package com.thigott.kotlinmultiplataformlibrary.domain.core
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.flow.Flow
@@ -12,6 +13,8 @@ import org.koin.core.component.KoinComponent
 
 abstract class UseCase<T, in Params>(private val scope: CoroutineScope): KoinComponent {
 
+    private var job: Job? = null
+
     abstract fun run(params: Params? = null): Flow<T>
 
     operator fun invoke(
@@ -19,15 +22,12 @@ abstract class UseCase<T, in Params>(private val scope: CoroutineScope): KoinCom
         onError: ((Throwable) -> Unit) = {},
         onSuccess: (T) -> Unit = {}
     ) {
-        val coroutineExceptionHandler = CoroutineExceptionHandler { context, error ->
+        val coroutineExceptionHandler = CoroutineExceptionHandler { _, error ->
             onError.invoke(error)
-            context.cancel()
-            context.cancelChildren()
-            cancel()
-            cancelScope()
+            job?.cancel()
         }
 
-        scope.launch(Dispatchers.Default + coroutineExceptionHandler) {
+        job = scope.launch(Dispatchers.Default + coroutineExceptionHandler) {
             try {
                 run(params).collect {
                     withContext(Dispatchers.Main) {
