@@ -21,8 +21,9 @@ abstract class UseCase<T, in Params>(private val scope: CoroutineScope): KoinCom
     ) {
         val coroutineExceptionHandler = CoroutineExceptionHandler { context, error ->
             onError.invoke(error)
-            context.cancelChildren()
             context.cancel()
+            context.cancelChildren()
+            cancel()
         }
 
         scope.launch(Dispatchers.Default + coroutineExceptionHandler) {
