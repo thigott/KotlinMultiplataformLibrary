@@ -3,6 +3,7 @@ package com.thigott.kotlinmultiplataformlibrary.domain.core
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -18,8 +19,10 @@ abstract class UseCase<T, in Params>(private val scope: CoroutineScope): KoinCom
         onError: ((Throwable) -> Unit) = {},
         onSuccess: (T) -> Unit = {}
     ) {
-        val coroutineExceptionHandler = CoroutineExceptionHandler { _, error ->
+        val coroutineExceptionHandler = CoroutineExceptionHandler { context, error ->
             onError.invoke(error)
+            context.cancelChildren()
+            context.cancel()
         }
 
         scope.launch(Dispatchers.Default + coroutineExceptionHandler) {
