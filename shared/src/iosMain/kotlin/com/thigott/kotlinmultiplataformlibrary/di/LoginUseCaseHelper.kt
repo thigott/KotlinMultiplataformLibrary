@@ -8,23 +8,17 @@ import org.koin.core.component.inject
 class LoginUseCaseHelper : KoinComponent {
 
     private val loginUseCase by inject<LoginUseCase>()
-    fun doLoginUseCase(
-        params: LoginUseCase.Params,
+    fun loginUseCase(
+        username: String,
+        password: String,
         success: (UserModel) -> Unit,
         error: (Throwable) -> Unit
     ) = loginUseCase(
-        params = params,
+        params = LoginUseCase.Params(
+            username = username,
+            password = password
+        ),
         onSuccess = { success.invoke(it) },
         onError = { error.invoke(it) }
     )
-
-    fun test() {
-        println("test")
-    }
-
-    fun testWithParams(
-        params: LoginUseCase.Params
-    ) {
-        println(params.username)
-    }
 }
