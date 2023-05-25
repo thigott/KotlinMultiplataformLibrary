@@ -1,4 +1,4 @@
-package com.thigott.kotlinmultiplataformlibrary.domain.repositories
+package com.thigott.kotlinmultiplataformlibrary.domain.repositories.remote
 
 import kotlinx.coroutines.flow.Flow
 

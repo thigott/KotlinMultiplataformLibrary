@@ -44,7 +44,13 @@ kotlin {
             }
         }
         val androidMain by getting
-        val androidUnitTest by getting
+        val androidUnitTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+                implementation(libs.junit)
+                implementation(libs.android.mockitoKotlin)
+            }
+        }
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting

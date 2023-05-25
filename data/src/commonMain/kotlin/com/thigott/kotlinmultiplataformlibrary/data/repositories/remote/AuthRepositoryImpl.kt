@@ -6,7 +6,7 @@ import com.thigott.kotlinmultiplataformlibrary.data.mappers.login.toDomain
 import com.thigott.kotlinmultiplataformlibrary.data.models.core.GenericResponse
 import com.thigott.kotlinmultiplataformlibrary.data.models.login.LoginRequest
 import com.thigott.kotlinmultiplataformlibrary.data.models.login.LoginResponse
-import com.thigott.kotlinmultiplataformlibrary.domain.repositories.AuthRepository
+import com.thigott.kotlinmultiplataformlibrary.domain.repositories.remote.AuthRepository
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.post

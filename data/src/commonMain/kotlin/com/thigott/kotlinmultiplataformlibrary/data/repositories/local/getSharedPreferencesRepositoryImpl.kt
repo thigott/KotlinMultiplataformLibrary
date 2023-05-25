@@ -1,0 +1,5 @@
+package com.thigott.kotlinmultiplataformlibrary.data.repositories.local
+
+import com.thigott.kotlinmultiplataformlibrary.domain.repositories.local.SharedPreferencesRepository
+
+expect fun getSharedPreferencesRepositoryImpl(): SharedPreferencesRepository

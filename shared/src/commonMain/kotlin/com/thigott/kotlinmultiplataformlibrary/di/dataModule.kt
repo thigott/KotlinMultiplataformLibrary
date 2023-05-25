@@ -1,9 +1,10 @@
 package com.thigott.kotlinmultiplataformlibrary.di
 
+import com.thigott.kotlinmultiplataformlibrary.data.repositories.local.getSharedPreferencesRepositoryImpl
 import com.thigott.kotlinmultiplataformlibrary.data.repositories.remote.AuthRepositoryImpl
 import com.thigott.kotlinmultiplataformlibrary.data.repositories.remote.KtorTestRepositoryImpl
-import com.thigott.kotlinmultiplataformlibrary.domain.repositories.AuthRepository
-import com.thigott.kotlinmultiplataformlibrary.domain.repositories.KtorTestRepository
+import com.thigott.kotlinmultiplataformlibrary.domain.repositories.remote.AuthRepository
+import com.thigott.kotlinmultiplataformlibrary.domain.repositories.remote.KtorTestRepository
 import com.thigott.kotlinmultiplataformlibrary.utils.createHttpClient
 import com.thigott.kotlinmultiplataformlibrary.utils.defaultConfig
 import io.ktor.client.HttpClient
@@ -29,5 +30,9 @@ val dataModule = module {
                 defaultConfig()
             }
         )
+    }
+
+    single {
+        getSharedPreferencesRepositoryImpl()
     }
 }

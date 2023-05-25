@@ -2,7 +2,7 @@ package com.thigott.kotlinmultiplataformlibrary.domain.usecases
 
 import com.thigott.kotlinmultiplataformlibrary.domain.core.UseCase
 import com.thigott.kotlinmultiplataformlibrary.domain.models.UserModel
-import com.thigott.kotlinmultiplataformlibrary.domain.repositories.AuthRepository
+import com.thigott.kotlinmultiplataformlibrary.domain.repositories.remote.AuthRepository
 import kotlinx.coroutines.CoroutineScope
 
 class LoginUseCase(

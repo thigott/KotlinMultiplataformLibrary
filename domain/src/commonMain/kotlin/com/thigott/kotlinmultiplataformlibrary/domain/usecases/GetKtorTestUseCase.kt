@@ -1,7 +1,7 @@
 package com.thigott.kotlinmultiplataformlibrary.domain.usecases
 
 import com.thigott.kotlinmultiplataformlibrary.domain.core.UseCase
-import com.thigott.kotlinmultiplataformlibrary.domain.repositories.KtorTestRepository
+import com.thigott.kotlinmultiplataformlibrary.domain.repositories.remote.KtorTestRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 

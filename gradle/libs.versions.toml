@@ -13,6 +13,7 @@ koinVersion = "3.2.2"
 coroutineVersion = "1.6.4"
 com-android-library = "8.1.0-alpha11"
 org-jetbrains-kotlin-jvm = "1.8.0"
+mockitoKotlinVersion = "4.1.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -31,6 +32,7 @@ ktorContentNegotiation = { group = "io.ktor", name = "ktor-client-content-negoti
 ktorJsonSerialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktorVersion" }
 koinCore = { group = "io.insert-koin", name = "koin-core", version.ref = "koinVersion" }
 coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutineVersion" }
+android-mockitoKotlin = { group="org.mockito.kotlin", name="mockito-kotlin", version.ref="mockitoKotlinVersion" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "com-android-application" }
