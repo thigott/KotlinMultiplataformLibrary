@@ -32,6 +32,7 @@ fun createHttpClient(): HttpClient {
         }
 
         install(DefaultRequest) {
+            println("Entrou dentro do header")
             header(HttpHeaders.ContentType, ContentType.Application.Json)
         }
     }
