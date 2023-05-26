@@ -5,6 +5,7 @@ import com.thigott.kotlinmultiplataformlibrary.domain.usecases.GetUserAccessToke
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.plugins.DefaultRequest
+import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
@@ -23,6 +24,10 @@ fun createHttpClient(
     val client = HttpClient {
         install(Logging) {
             level = LogLevel.ALL
+        }
+
+        install(HttpTimeout) {
+            requestTimeoutMillis = 60000
         }
 
         install(ContentNegotiation) {
