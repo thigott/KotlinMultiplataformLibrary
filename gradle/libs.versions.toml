@@ -13,6 +13,7 @@ koinVersion = "3.2.2"
 coroutineVersion = "1.6.4"
 com-android-library = "8.1.0-alpha11"
 org-jetbrains-kotlin-jvm = "1.8.0"
+logBackVersion = "1.4.7"
 mockkVersion = "1.13.5"
 
 [libraries]
@@ -24,6 +25,7 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 ktorCore = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktorVersion" }
 ktorLogging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktorVersion" }
+ktorLoggingArtifact = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logBackVersion" }
 ktorSerialization = { group = "io.ktor", name = "ktor-client-serialization", version.ref = "ktorVersion" }
 ktorAndroidClient = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktorVersion" }
 ktorHttpClient = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktorVersion" }
@@ -41,6 +43,6 @@ com-android-library = { id = "com.android.library", version.ref = "com-android-l
 org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
 
 [bundles]
-ktor = [ "ktorCore", "ktorLogging", "ktorSerialization", "ktorJsonSerialization", "ktorContentNegotiation" ]
+ktor = [ "ktorCore", "ktorLogging", "ktorSerialization", "ktorJsonSerialization", "ktorContentNegotiation", "ktorLoggingArtifact" ]
 ktorAndroid = [ "ktorHttpClient", "ktorAndroidClient" ]
 koin = [ "koinCore", "coroutines" ]
