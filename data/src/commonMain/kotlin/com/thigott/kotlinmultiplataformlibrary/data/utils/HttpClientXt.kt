@@ -37,17 +37,11 @@ fun createHttpClient(
 
         install(DefaultRequest) {
             header(HttpHeaders.ContentType, ContentType.Application.Json)
-            println("Entrou no header")
             getUserAccessTokenUseCase(
                 onSuccess = {
                     header(HttpHeaders.Authorization, it)
-                    println("Succeso $it")
-                },
-                onError = {
-                    println("Error $it")
                 }
             )
-
         }
     }
 
