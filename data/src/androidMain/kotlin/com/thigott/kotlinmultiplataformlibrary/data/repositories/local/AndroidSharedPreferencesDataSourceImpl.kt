@@ -14,10 +14,10 @@ class AndroidSharedPreferencesDataSourceImpl: SharedPreferencesDataSource, KoinC
     }
 
     override fun putString(key: String, value: String) {
-        getSpEditor().putString(key, value)
+        getSpEditor().putString(key, value).apply()
     }
 
-    private fun getSp() = context.getSharedPreferences(SP_NAME, 0)
+    private fun getSp() = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE)
     private fun getSpEditor() = getSp().edit()
 }
 
