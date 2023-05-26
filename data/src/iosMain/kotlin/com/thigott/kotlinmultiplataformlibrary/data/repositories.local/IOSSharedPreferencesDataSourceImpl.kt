@@ -1,9 +1,8 @@
 package com.thigott.kotlinmultiplataformlibrary.data.repositories.local
 
-import com.thigott.kotlinmultiplataformlibrary.domain.repositories.local.SharedPreferencesRepository
 import platform.Foundation.NSUserDefaults
 
-class IOSSharedPreferencesRepositoryImpl: SharedPreferencesRepository {
+class IOSSharedPreferencesDataSourceImpl: SharedPreferencesDataSource {
     override fun getString(key: String): String? {
         return NSUserDefaults.standardUserDefaults().stringForKey(key)
     }
@@ -13,6 +12,6 @@ class IOSSharedPreferencesRepositoryImpl: SharedPreferencesRepository {
     }
 }
 
-actual fun getSharedPreferencesRepositoryImpl(): SharedPreferencesRepository {
-    return IOSSharedPreferencesRepositoryImpl()
+actual fun getSharedPreferencesDataSourceImpl(): SharedPreferencesDataSource {
+    return IOSSharedPreferencesDataSourceImpl()
 }

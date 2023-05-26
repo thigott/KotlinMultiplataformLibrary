@@ -2,11 +2,10 @@ package com.thigott.kotlinmultiplataformlibrary.data.repositories.local
 
 import android.content.Context
 import com.thigott.kotlinmultiplataformlibrary.data.repositories.local.SharedPreferencesConstants.SP_NAME
-import com.thigott.kotlinmultiplataformlibrary.domain.repositories.local.SharedPreferencesRepository
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class AndroidSharedPreferencesRepositoryImpl: SharedPreferencesRepository, KoinComponent {
+class AndroidSharedPreferencesDataSourceImpl: SharedPreferencesDataSource, KoinComponent {
 
     private val context by inject<Context>()
 
@@ -22,6 +21,6 @@ class AndroidSharedPreferencesRepositoryImpl: SharedPreferencesRepository, KoinC
     private fun getSpEditor() = getSp().edit()
 }
 
-actual fun getSharedPreferencesRepositoryImpl(): SharedPreferencesRepository {
-    return AndroidSharedPreferencesRepositoryImpl()
+actual fun getSharedPreferencesDataSourceImpl(): SharedPreferencesDataSource {
+    return AndroidSharedPreferencesDataSourceImpl()
 }

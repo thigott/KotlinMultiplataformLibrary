@@ -1,6 +1,7 @@
 package com.thigott.kotlinmultiplataformlibrary.di
 
 import com.thigott.kotlinmultiplataformlibrary.domain.usecases.GetKtorTestUseCase
+import com.thigott.kotlinmultiplataformlibrary.domain.usecases.GetUserAccessTokenUseCase
 import com.thigott.kotlinmultiplataformlibrary.domain.usecases.LoginUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,6 +23,12 @@ val domainModule = module {
     factory {
         LoginUseCase(
             scope = get(),
+            repository = get()
+        )
+    }
+
+    factory {
+        GetUserAccessTokenUseCase(
             repository = get()
         )
     }

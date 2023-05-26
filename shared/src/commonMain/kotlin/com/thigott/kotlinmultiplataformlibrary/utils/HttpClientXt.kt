@@ -1,5 +1,6 @@
 package com.thigott.kotlinmultiplataformlibrary.utils
 
+import com.thigott.kotlinmultiplataformlibrary.domain.usecases.GetUserAccessTokenUseCase
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.plugins.DefaultRequest
@@ -15,7 +16,9 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 
-fun createHttpClient(): HttpClient {
+fun createHttpClient(
+    getUserAccessTokenUseCase: GetUserAccessTokenUseCase
+): HttpClient {
     val client = HttpClient {
         install(Logging) {
             level = LogLevel.ALL
@@ -32,6 +35,15 @@ fun createHttpClient(): HttpClient {
         }
 
         install(DefaultRequest) {
+            println("Entrou no header")
+            getUserAccessTokenUseCase(
+                onSuccess = {
+                    println("Succeso $it")
+                },
+                onError = {
+                    println("Error $it")
+                }
+            )
             header(HttpHeaders.ContentType, ContentType.Application.Json)
         }
     }

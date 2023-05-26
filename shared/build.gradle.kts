@@ -48,7 +48,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(libs.junit)
-                implementation(libs.android.mockitoKotlin)
+                implementation(libs.android.mockk)
             }
         }
         val iosX64Main by getting

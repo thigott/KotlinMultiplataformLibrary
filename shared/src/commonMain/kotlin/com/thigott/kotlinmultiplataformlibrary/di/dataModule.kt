@@ -1,8 +1,10 @@
 package com.thigott.kotlinmultiplataformlibrary.di
 
-import com.thigott.kotlinmultiplataformlibrary.data.repositories.local.getSharedPreferencesRepositoryImpl
+import com.thigott.kotlinmultiplataformlibrary.data.repositories.local.UserSessionRepositoryImpl
+import com.thigott.kotlinmultiplataformlibrary.data.repositories.local.getSharedPreferencesDataSourceImpl
 import com.thigott.kotlinmultiplataformlibrary.data.repositories.remote.AuthRepositoryImpl
 import com.thigott.kotlinmultiplataformlibrary.data.repositories.remote.KtorTestRepositoryImpl
+import com.thigott.kotlinmultiplataformlibrary.domain.repositories.local.UserSessionRepository
 import com.thigott.kotlinmultiplataformlibrary.domain.repositories.remote.AuthRepository
 import com.thigott.kotlinmultiplataformlibrary.domain.repositories.remote.KtorTestRepository
 import com.thigott.kotlinmultiplataformlibrary.utils.createHttpClient
@@ -13,7 +15,13 @@ import org.koin.dsl.module
 val dataModule = module {
 
     single {
-        createHttpClient()
+        createHttpClient(
+            getUserAccessTokenUseCase = get()
+        )
+    }
+
+    single {
+        getSharedPreferencesDataSourceImpl()
     }
 
     single<KtorTestRepository> {
@@ -26,13 +34,16 @@ val dataModule = module {
 
     single<AuthRepository> {
         AuthRepositoryImpl(
-            httpClient = get<HttpClient>().config {
+            remoteDataSource = get<HttpClient>().config {
                 defaultConfig()
-            }
+            },
+            localDataSource = get()
         )
     }
 
-    single {
-        getSharedPreferencesRepositoryImpl()
+    single<UserSessionRepository> {
+        UserSessionRepositoryImpl(
+            localDataSource = get()
+        )
     }
 }
