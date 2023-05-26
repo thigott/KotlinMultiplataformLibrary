@@ -1,5 +1,6 @@
-package com.thigott.kotlinmultiplataformlibrary.utils
+package com.thigott.kotlinmultiplataformlibrary.data.utils
 
+import com.thigott.kotlinmultiplataformlibrary.data.core.Core
 import com.thigott.kotlinmultiplataformlibrary.domain.usecases.GetUserAccessTokenUseCase
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
@@ -35,16 +36,18 @@ fun createHttpClient(
         }
 
         install(DefaultRequest) {
+            header(HttpHeaders.ContentType, ContentType.Application.Json)
             println("Entrou no header")
             getUserAccessTokenUseCase(
                 onSuccess = {
+                    header(HttpHeaders.Authorization, it)
                     println("Succeso $it")
                 },
                 onError = {
                     println("Error $it")
                 }
             )
-            header(HttpHeaders.ContentType, ContentType.Application.Json)
+
         }
     }
 
@@ -55,7 +58,7 @@ fun HttpClientConfig<*>.defaultConfig() {
     defaultRequest {
         url {
             protocol = URLProtocol.HTTPS
-            host = "apigatewaygerenciamento-dev.havan.com.br"
+            host = Core.BASE_URL
         }
     }
 }

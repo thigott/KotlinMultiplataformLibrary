@@ -15,7 +15,7 @@ class GetUserAccessTokenUseCase(
             if (accessToken.isEmpty()) {
                 onError.invoke(NullPointerException())
             } else {
-                onSuccess.invoke(accessToken)
+                onSuccess.invoke("Bearer $accessToken")
             }
         } catch (e: Exception) {
             onError.invoke(e)
