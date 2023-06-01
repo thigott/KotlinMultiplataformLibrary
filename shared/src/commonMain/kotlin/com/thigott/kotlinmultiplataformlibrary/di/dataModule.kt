@@ -1,5 +1,6 @@
 package com.thigott.kotlinmultiplataformlibrary.di
 
+import com.thigott.kotlinmultiplataformlibrary.data.core.getDatabaseDriver
 import com.thigott.kotlinmultiplataformlibrary.data.repositories.local.UserSessionRepositoryImpl
 import com.thigott.kotlinmultiplataformlibrary.data.repositories.local.getSharedPreferencesDataSourceImpl
 import com.thigott.kotlinmultiplataformlibrary.data.repositories.remote.AuthRepositoryImpl
@@ -7,6 +8,7 @@ import com.thigott.kotlinmultiplataformlibrary.data.repositories.remote.KtorTest
 import com.thigott.kotlinmultiplataformlibrary.data.repositories.remote.UserRepositoryImpl
 import com.thigott.kotlinmultiplataformlibrary.data.utils.createHttpClient
 import com.thigott.kotlinmultiplataformlibrary.data.utils.defaultConfig
+import com.thigott.kotlinmultiplataformlibrary.database.KmmLibraryDatabase
 import com.thigott.kotlinmultiplataformlibrary.domain.repositories.local.UserSessionRepository
 import com.thigott.kotlinmultiplataformlibrary.domain.repositories.remote.AuthRepository
 import com.thigott.kotlinmultiplataformlibrary.domain.repositories.remote.KtorTestRepository
@@ -24,6 +26,16 @@ val dataModule = module {
 
     single {
         getSharedPreferencesDataSourceImpl()
+    }
+
+    single {
+        getDatabaseDriver()
+    }
+
+    single {
+        KmmLibraryDatabase(
+            driver = get()
+        )
     }
 
     single<KtorTestRepository> {
@@ -53,7 +65,8 @@ val dataModule = module {
         UserRepositoryImpl(
             remoteDataSource = get<HttpClient>().config {
                 defaultConfig()
-            }
+            },
+            localDataSource = get()
         )
     }
 }

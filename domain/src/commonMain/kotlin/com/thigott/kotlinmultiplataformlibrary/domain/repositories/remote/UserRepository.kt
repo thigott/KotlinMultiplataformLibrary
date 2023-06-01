@@ -6,4 +6,8 @@ import kotlinx.coroutines.flow.Flow
 interface UserRepository {
 
     fun getUserLoggedData(): Flow<UserModel>
+
+    fun saveUserData(userModel: UserModel)
+
+    fun getUser(id: Int): Flow<UserModel?>
 }

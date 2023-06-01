@@ -14,6 +14,7 @@ coroutineVersion = "1.6.4"
 com-android-library = "8.1.0-alpha11"
 org-jetbrains-kotlin-jvm = "1.8.0"
 mockkVersion = "1.13.5"
+sqlDelightVersion = "1.5.5"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -33,6 +34,9 @@ ktorJsonSerialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-
 koinCore = { group = "io.insert-koin", name = "koin-core", version.ref = "koinVersion" }
 coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutineVersion" }
 android-mockk = { group = "io.mockk", name = "mockk-android", version.ref = "mockkVersion" }
+sqldelightGradlePlugin = { group = "com.squareup.sqldelight", name = "gradle-plugin", version.ref = "sqlDelightVersion" }
+sqldelightAndroid = { group = "com.squareup.sqldelight", name = "android-driver", version.ref = "sqlDelightVersion" }
+sqldelightIOS = { group = "com.squareup.sqldelight", name = "native-driver", version.ref = "sqlDelightVersion" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "com-android-application" }

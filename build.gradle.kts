@@ -6,6 +6,13 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization").version("1.8.21")
 }
 
+buildscript {
+
+    dependencies {
+        classpath(libs.sqldelightGradlePlugin)
+    }
+}
+
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }

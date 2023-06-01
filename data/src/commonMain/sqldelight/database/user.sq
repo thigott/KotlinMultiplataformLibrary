@@ -1,0 +1,28 @@
+CREATE TABLE IF NOT EXISTS UserEntity(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    cpf TEXT NOT NULL,
+    name TEXT NOT NULL,
+    address TEXT NOT NULL
+);
+
+getAllUsers:
+SELECT *
+FROM UserEntity;
+
+getUser:
+SELECT *
+FROM UserEntity
+WHERE id = ?;
+
+insertUser:
+INSERT OR REPLACE
+INTO UserEntity(
+    id,
+    cpf,
+    name,
+    address
+) VALUES (?, ?, ?, ?);
+
+deleteUser:
+DELETE FROM UserEntity
+WHERE id = ?;

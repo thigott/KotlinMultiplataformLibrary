@@ -3,6 +3,7 @@ plugins {
     kotlin("native.cocoapods")
     id("com.android.library")
     id("kotlinx-serialization")
+    id("com.squareup.sqldelight")
 }
 
 version = "1.0.0"
@@ -45,6 +46,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(libs.bundles.ktorAndroid)
+                implementation(libs.sqldelightAndroid)
             }
         }
         val androidUnitTest by getting
@@ -58,6 +60,7 @@ kotlin {
             iosSimulatorArm64Main.dependsOn(this)
             dependencies {
                 implementation(libs.ktorIOSClient)
+                implementation(libs.sqldelightIOS)
             }
         }
         val iosX64Test by getting
@@ -74,6 +77,13 @@ kotlin {
 
 dependencies {
     api(project(":domain"))
+}
+
+sqldelight {
+    database("KmmLibraryDatabase") {
+        packageName = "com.thigott.kotlinmultiplataformlibrary.database"
+        sourceFolders = listOf("sqldelight")
+    }
 }
 
 android {
