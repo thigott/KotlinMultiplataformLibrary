@@ -30,7 +30,7 @@ class AuthRepositoryImpl(
                     LoginRequest(
                         username = username,
                         password = password,
-                        deviceId = ""
+                        deviceId = "123456789"
                     )
                 )
             }.body<GenericResponse<LoginResponse>>()
