@@ -27,8 +27,10 @@ kotlin {
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "data"
+            isStatic = false
         }
     }
+
     
     sourceSets {
         val commonMain by getting {
