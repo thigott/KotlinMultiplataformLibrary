@@ -28,6 +28,8 @@ fun createHttpClient(
 
         install(HttpTimeout) {
             requestTimeoutMillis = 60000
+            connectTimeoutMillis = 60000
+            socketTimeoutMillis = 60000
         }
 
         install(ContentNegotiation) {
